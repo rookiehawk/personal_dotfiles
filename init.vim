@@ -116,6 +116,14 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'default'
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline_theme='luna'
+let g:airline_powerline_fonts = 1
+" set guifont=DejaVu Sans Mono for Powerline Book:h13
+" 首先要安装powerline字体，然后终端使用powerline字体，才会完整显示出
+" luna 主题
+
+
+
 
 
 " ==================  indentLine ===============
