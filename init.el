@@ -155,3 +155,14 @@
 (setq visible-bell 0)
 
 
+;; emacs中,tab键常常被空格键取代功能，下面的设置，使tab键永远都是tab键
+;; 在各种mode下
+(global-set-key (kbd "TAB") 'self-insert-command)
+;; 仅仅在text-mode下
+;; (define-key text-mode-map (kbd "TAB") 'self-insert-command)
+
+
+
+;; tab 4个空格而不是8个
+(setq-default tab-width 4)
+(setq-default indent-tabs-mode nil)
