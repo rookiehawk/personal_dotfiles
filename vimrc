@@ -50,6 +50,11 @@ set autoread " 打开文件监视，如果在编辑过程中文件发生外部�
 set autowrite
 set wildmenu
 set wildmode=longest:list,full " 命令模式下，底部操作指令按下tab自动补全，第一次tab，会显示所有匹配的操作指令清单，第二次tab，依次选择各个指令
+"共享剪切板"
+set clipboard+=unnamed
+"文件类型自动检测，代码智能补全"
+set completeopt=longest,preview,menu
+
 
 "==============================================================================
 " 主题配色 
@@ -61,6 +66,19 @@ set wildmode=longest:list,full " 命令模式下，底部操作指令按下tab�
 set t_Co=256
 colorscheme gruvbox
 set background=dark
+
+" ====================== 状态栏 ==========================
+" set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}   "状态行显示的内容
+
+set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L] 
+" set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
+
+" =================== 显示中文帮助 ==========================
+
+if version >= 603
+        set helplang=cn
+            set encoding=utf-8
+endif
 
 
 
