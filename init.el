@@ -24,11 +24,6 @@
   swiper
   counsel
   smartparens
-  ;; --- Major Mode ---
-  js2-mode
-  ;; --- Minor Mode ---
-  nodejs-repl
-  exec-path-from-shell
   ;; --- Themes ---
   monokai-theme
   ;; solarized-theme
@@ -54,9 +49,26 @@
 
 ;; ================================ 插件配置 =============================
 
+;; hungry-delete 配置
+(require 'hungry-delete)
+(global-hungry-delete-mode)
+
+;; swiper 配置
+(ivy-mode 1)
+(setq ivy-use-virtual-buffers t)
+(setq enable-recursive-minibuffers t)
+;; enable this if you want `swiper' to use it
+;; (setq search-default-mode #'char-fold-to-regexp)
+(global-set-key "\C-s" 'swiper)
+(global-set-key (kbd "C-c C-r") 'ivy-resume)
+(global-set-key (kbd "<f6>") 'ivy-resume)
+(global-set-key (kbd "M-x") 'counsel-M-x)
+(global-set-key (kbd "C-x C-f") 'counsel-find-file)
+(define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 
 
-
+;; smartparens配置
+(require 'smartparens)
 
 
 
@@ -82,14 +94,15 @@
 (setq cursor-type 'bar)
 
 ;; 关闭启动帮助画面
-(setq inhibit-splash-screen 1)
+;; (setq inhibit-splash-screen 1)
 
 ;; 关闭缩进 (第二天中被去除)
 ;; (electric-indent-mode -1)
 
 ;; 更改显示字体大小 16pt
 ;; (set-default-font "Monaco 12")
-(set-default-font "YaHei Consolas Hybrid 13")
+;; (set-default-font "YaHei Consolas Hybrid 13")
+(set-default-font "Powerline Consolas 12")
 (setq linum-format "%d ") ;; 注意%d后有空格，即用空格将行号和代码隔开
 
 ;; 快速打开配置文件
