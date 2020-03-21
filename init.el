@@ -27,6 +27,7 @@
   ;; --- Themes ---
   monokai-theme
   ;; solarized-theme
+  popwin
   ) "Default packages")
 
  (setq package-selected-packages my/packages)
@@ -70,10 +71,10 @@
 ;; smartparens配置
 (require 'smartparens)
 
-
-
-
-
+;; popwin配置
+(require 'popwin)
+(popwin-mode 1)
+(global-set-key (kbd "C-z") popwin:keymap)
 
 
 
@@ -100,9 +101,9 @@
 ;; (electric-indent-mode -1)
 
 ;; 更改显示字体大小 16pt
-;; (set-default-font "Monaco 12")
+(set-default-font "Monaco 11")
 ;; (set-default-font "YaHei Consolas Hybrid 13")
-(set-default-font "Powerline Consolas 12")
+;; (set-default-font "Powerline Consolas 12")
 (setq linum-format "%d ") ;; 注意%d后有空格，即用空格将行号和代码隔开
 
 ;; 快速打开配置文件
