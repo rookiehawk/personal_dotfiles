@@ -23,7 +23,7 @@ bindsym $mod+n border normal
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 # font xft:URWGothic-Book 11
-font xft:Hack 12
+font xft:Hack Nerd Font Mono Regular12
 
 
 # Use Mouse+$mod to drag floating windows
@@ -36,7 +36,8 @@ floating_modifier $mod
 bindsym $mod+Shift+q kill
 
 # start program launcher
-bindsym $mod+d exec --no-startup-id dmenu_recency
+bindsym $mod+d exec --no-startup-id rofi -show drun -theme Adapta-Nokto
+bindsym $mod+Shift+d exec --no-startup-id dmenu_recency
 
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
@@ -144,14 +145,14 @@ bindsym $mod+Ctrl+Left workspace prev
 # to display names or symbols instead of plain workspace numbers you can use
 # something like: set $ws1 1:mail
 #                 set $ws2 2:
-set $ws1 1:App
-set $ws2 2:Code
-set $ws3 3:Broswer
-set $ws4 4:Mail
-set $ws5 5:Org-mode
-set $ws6 6
-set $ws7 7
-set $ws8 8
+set $ws1 1:1.App
+set $ws2 2:2.Code
+set $ws3 3:3.Broswer
+set $ws4 4:4.Mail
+set $ws5 5:5.Org-mode
+set $ws6 6:6.Vbox
+set $ws7 7:7.Games
+set $ws8 8:8.Others
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -184,7 +185,7 @@ bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 
 # Open applications on specific workspaces
-# assign [class="Thunderbird"] $ws1
+assign [class="Virtualbox"] $ws6
 # assign [class="Pale moon"] $ws2
 # assign [class="Pcmanfm"] $ws3
 # assign [class="Skype"] $ws5
@@ -284,7 +285,7 @@ exec --no-startup-id pamac-tray
 exec --no-startup-id clipit
 # exec --no-startup-id blueman-applet
 # exec_always --no-startup-id sbxkb
-exec --no-startup-id start_conky_maia
+# exec --no-startup-id start_conky_maia
 # exec --no-startup-id start_conky_green
 exec --no-startup-id xautolock -time 10 -locker blurlock
 exec_always --no-startup-id ff-theme-util
@@ -433,14 +434,11 @@ bindsym $mod+Return exec terminator
 exec_always --no-startup-id fcitx
 
 # feh
-exec_always --no-startup-id feh --bg-scale "$HOME/Pictures/wallpaper/1.jpg"
+# exec_always --no-startup-id feh --bg-scale "$HOME/Pictures/wallpaper/1.jpg"
 
 # browser
 bindsym $mod+F2 exec google-chrome-stable
 bindsym $mod+c  exec google-chrome-stable
-
-# albert
-exec_always --no-startup-id albert
 
 # xrandr 配置显示器
 exec xrandr --output HDMI1 --auto --output LVDS1 --off
