@@ -329,6 +329,8 @@ bar {
 	position bottom
 
 ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
+# 我的修改
+        xrandr --output HDMI1 --primary
 #	tray_output primary
 #	tray_output eDP1
 
@@ -437,7 +439,8 @@ exec_always --no-startup-id fcitx
 # exec_always --no-startup-id feh --bg-scale "$HOME/Pictures/wallpaper/1.jpg"
 
 # browser
-bindsym $mod+F2 exec google-chrome-stable
+# bindsym $mod+F2 exec google-chrome-stable
+bindsym $mod+F2 exec firefox
 bindsym $mod+c  exec google-chrome-stable
 
 # xrandr 配置显示器
