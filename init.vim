@@ -54,9 +54,8 @@ set wildmode=longest:list,full " 命令模式下，底部操作指令按下tab�
 "==============================================================================
 " 主题配色 
 "==============================================================================
-
-" 开启24bit的颜色，开启这个颜色会更漂亮一些
-set termguicolors
+colorscheme gruvbox
+set background=dark
 
 
 
@@ -103,6 +102,10 @@ Plug 'tpope/vim-surround'
 
 " vim-easymotion
 Plug 'easymotion/vim-easymotion'
+
+" 配合Nerd Font的一些图标
+Plug 'ryanoasis/vim-devicons'
+
 " Initialize plugin system
 call plug#end()
 
