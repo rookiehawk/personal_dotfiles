@@ -4,7 +4,6 @@ set nu
 syntax on
 syntax enable
 set autoindent
-set laststatus=2
 set ruler " 在状态栏显示光标的当前位置，位于哪一行那一列
 " set cursorline
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
@@ -55,7 +54,13 @@ set clipboard+=unnamed
 "文件类型自动检测，代码智能补全"
 set completeopt=longest,preview,menu
 
-
+"隐藏工具栏"
+set guioptions-=T
+"隐藏菜单栏"
+set guioptions-=m
+set guioptions-=r
+set guioptions-=l
+set guioptions-=b 
 "==============================================================================
 " 主题配色 
 "==============================================================================
@@ -64,8 +69,8 @@ set completeopt=longest,preview,menu
 " set termguicolors
 " set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ Book\ :h13:cANSI
 set t_Co=256
-colorscheme gruvbox
-set background=dark
+" colorscheme gruvbox
+" set background=dark
 
 " ====================== 状态栏 ==========================
 " set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}   "状态行显示的内容
@@ -86,7 +91,7 @@ if has('gui_running')
     if has("win16") || has("win32") || has("win95") || has("win64")
         set guifont=Consolas:h11,Courier_New:h11:cANSI
     else
-        set guifont=Fira\ Code\ Retina\ 12
+        set guifont=Hack\ Nerd\ Font\ Mono\ 11
     endif
 endif
 " set guifont=Andale\ Mono\ 11 这是linux设置gvim字体的格式
