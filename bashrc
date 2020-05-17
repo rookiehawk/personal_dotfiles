@@ -129,7 +129,7 @@ unset __conda_setup
 
 
 
-# golang 1.13.8
+# golang 1.14.3
 export GOROOT=/opt/go
 export GOPATH=/home/chaos/goProjects
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
@@ -138,8 +138,8 @@ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 # export GO111MODULE=on
 export GO111MODULE=auto
 # 配置 GOPROXY 环境变量
-# export GOPROXY=https://goproxy.io
-export GOPROXY=https://mirrors.aliyun.com/goproxy/
+export GOPROXY=https://goproxy.io
+# export GOPROXY=https://mirrors.aliyun.com/goproxy/
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
