@@ -73,13 +73,11 @@ set t_Co=256
 colorscheme gruvbox
 set background=dark
 
-" ====================== 状态栏 ==========================
-" set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}   "状态行显示的内容
+" =================== map 映射 ============================
 
-" set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L] 
-" set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
 
-" =================== 显示中文帮助 ==========================
+
+"=================== 显示中文帮助 ==========================
 
 if version >= 603
         set helplang=cn
@@ -90,9 +88,9 @@ endif
 " ================= guifont ================================
 if has('gui_running')
     if has("win16") || has("win32") || has("win95") || has("win64")
-        set guifont=Consolas:h11,Courier_New:h11:cANSI
+        set guifont=Consolas:h13,Courier_New:h11:cANSI
     else
-        set guifont=Hack\ Nerd\ Font\ Mono\ 11
+        set guifont=Hack\ Nerd\ Font\ Mono\ 13
     endif
 endif
 " set guifont=Andale\ Mono\ 11 这是linux设置gvim字体的格式
@@ -142,7 +140,7 @@ let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 " 设置tagbar快捷键
 nmap <F8> :TagbarToggle<CR>  
 let g:tagbar_ctags_bin='/usr/bin/ctags'  " 设置ctags所在路径
-
+" 需要下载ctags
 " auto-pairs
 " fly mode
 let g:AutoPairsFlyMode = 1
