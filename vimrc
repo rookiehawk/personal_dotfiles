@@ -4,6 +4,7 @@ set nu
 syntax on
 syntax enable
 set autoindent
+let mapleader = "\<space>"
 set ruler " 在状态栏显示光标的当前位置，位于哪一行那一列
 " set cursorline
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
@@ -69,8 +70,8 @@ set guioptions-=b
 " set termguicolors
 " set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ Book\ :h13:cANSI
 set t_Co=256
-" colorscheme gruvbox
-" set background=dark
+colorscheme gruvbox
+set background=dark
 
 " ====================== 状态栏 ==========================
 " set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}   "状态行显示的内容
@@ -97,3 +98,86 @@ endif
 " set guifont=Andale\ Mono\ 11 这是linux设置gvim字体的格式
 " set guifont=Monaco:h11 Mac风格
 " set guifont=Andale_Mono:h11 Win风格
+
+call plug#begin('~/.vim/plugged')
+
+" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+Plug 'junegunn/vim-easy-align'
+
+Plug 'scrooloose/nerdtree'
+
+" Plugin outside ~/.vim/plugged with post-update hook
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
+Plug 'valloric/youcompleteme'
+
+Plug 'easymotion/vim-easymotion'
+
+Plug 'itchyny/lightline.vim'
+
+Plug 'Yggdroot/indentLine'
+
+Plug 'jiangmiao/auto-pairs'
+
+Plug 'mhinz/vim-startify'
+
+Plug 'ryanoasis/vim-devicons'
+
+Plug 'majutsushi/tagbar'
+
+Plug 'kien/ctrlp.vim'
+
+Plug 'morhetz/gruvbox'
+Plug 'shinchu/lightline-gruvbox.vim'
+
+" Initialize plugin system
+call plug#end()
+
+
+" =================== configuration ====================
+" indentline
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+
+" tagbar
+" 设置tagbar快捷键
+nmap <F8> :TagbarToggle<CR>  
+let g:tagbar_ctags_bin='/usr/bin/ctags'  " 设置ctags所在路径
+
+" auto-pairs
+" fly mode
+let g:AutoPairsFlyMode = 1
+let g:AutoPairsShortcutBackInsert = '<M-b>'
+
+" nerdtree
+map <C-n> :NERDTreeToggle<CR>
+
+" vim-easy-align
+nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
+
+" easymotion
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+
+" Jump to anywhere you want with minimal keystrokes, with just one key binding.
+" `s{char}{label}`
+nmap s <Plug>(easymotion-overwin-f)
+" or
+" `s{char}{char}{label}`
+" Need one more keystroke, but on average, it may be more comfortable.
+nmap s <Plug>(easymotion-overwin-f2)
+
+" Turn on case-insensitive feature
+let g:EasyMotion_smartcase = 1
+
+" JK motions: Line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+
+" ctrlp
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+
+" lightline-gruvbox.vim
+let g:lightline = {}
+let g:lightline.colorscheme = 'gruvbox'
