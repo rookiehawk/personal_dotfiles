@@ -106,6 +106,7 @@ Plug 'scrooloose/nerdtree'
 
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 Plug 'valloric/youcompleteme'
 
@@ -127,6 +128,10 @@ Plug 'kien/ctrlp.vim'
 
 Plug 'morhetz/gruvbox'
 Plug 'shinchu/lightline-gruvbox.vim'
+
+Plug 'tpope/vim-surround'
+
+Plug 'airblade/vim-gitgutter'
 
 " Initialize plugin system
 call plug#end()
