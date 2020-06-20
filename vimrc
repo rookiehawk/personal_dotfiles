@@ -7,7 +7,7 @@ set autoindent
 let mapleader = "\<space>"
 set ruler " 在状态栏显示光标的当前位置，位于哪一行那一列
 " set cursorline
-set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
+set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936,chinese
 set termencoding=utf-8
 set encoding=utf-8
 " 鼠标
@@ -51,7 +51,7 @@ set autowrite
 set wildmenu
 set wildmode=longest:list,full " 命令模式下，底部操作指令按下tab自动补全，第一次tab，会显示所有匹配的操作指令清单，第二次tab，依次选择各个指令
 "共享剪切板"
-set clipboard+=unnamed
+set clipboard=unnamed
 "文件类型自动检测，代码智能补全"
 set completeopt=longest,preview,menu
 
@@ -88,9 +88,10 @@ endif
 " ================= guifont ================================
 if has('gui_running')
     if has("win16") || has("win32") || has("win95") || has("win64")
-        set guifont=Consolas:h13,Courier_New:h11:cANSI
+"        set guifont=Monaco:h13,Consolas:h13,Courier_New:h11:cANSI
+        set guifont=Liberation Mono:h13,Consolas:h13,Courier_New:h11:cANSI
     else
-        set guifont=Hack\ Nerd\ Font\ Mono\ 13
+        set guifont=JetBrainsMono\ Nerd\ Font\ Mono\ 13
     endif
 endif
 " set guifont=Andale\ Mono\ 11 这是linux设置gvim字体的格式
