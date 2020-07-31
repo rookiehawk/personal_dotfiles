@@ -134,6 +134,9 @@ Plug 'tpope/vim-surround'
 
 Plug 'airblade/vim-gitgutter'
 
+Plug 'pangloss/vim-javascript'
+
+Plug 'mattn/emmet-vim'
 " Initialize plugin system
 call plug#end()
 
@@ -248,3 +251,17 @@ let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 "let g:ycm_key_invoke_completion = ['<C-Space>']
 " 停止显示补全列表(防止列表影响视野), 可以按<C-Space>重新弹出
 "let g:ycm_key_list_stop_completion = ['<C-y>']
+
+
+" ================= javacript vim =============================================
+let g:javascript_plugin_jsdoc = 1
+
+" ================== emmet vim ===================================
+let g:user_emmet_mode='n'    "only enable normal mode functions.
+let g:user_emmet_mode='inv'  "enable all functions, which is equal to
+let g:user_emmet_mode='a'    "enable all function in all mode.
+
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+
+

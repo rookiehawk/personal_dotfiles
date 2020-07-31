@@ -99,6 +99,9 @@ Plug 'easymotion/vim-easymotion'
 " 配合Nerd Font的一些图标
 Plug 'ryanoasis/vim-devicons'
 
+Plug 'pangloss/vim-javascript'
+
+Plug 'mattn/emmet-vim'
 " Initialize plugin system
 call plug#end()
 
@@ -195,3 +198,15 @@ function! s:fzf_statusline()
 endfunction
 
 autocmd! User FzfStatusLine call <SID>fzf_statusline()
+
+
+" ================= javacript vim =============================================
+let g:javascript_plugin_jsdoc = 1
+
+" ================== emmet vim ===================================
+let g:user_emmet_mode='n'    "only enable normal mode functions.
+let g:user_emmet_mode='inv'  "enable all functions, which is equal to
+let g:user_emmet_mode='a'    "enable all function in all mode.
+
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
