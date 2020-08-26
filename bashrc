@@ -112,6 +112,13 @@ if ! shopt -oq posix; then
   fi
 fi
 
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export NVM_NODEJS_ORG_MIRROR=http://npm.taobao.org/mirrors/node
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/chaos/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
@@ -128,10 +135,9 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 
-
-# golang 1.14.3
+# golang 1.15
 export GOROOT=/opt/go
-export GOPATH=/home/chaos/goProjects
+export GOPATH=/home/chaos/me/goProjects
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # 启用 Go Modules 功能
@@ -141,9 +147,8 @@ export GO111MODULE=auto
 export GOPROXY=https://goproxy.io
 # export GOPROXY=https://mirrors.aliyun.com/goproxy/
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-export NVM_NODEJS_ORG_MIRROR=http://npm.taobao.org/mirrors/node
+# Rust
+export RUSTUP_DIST_SERVER=https://mirrors.sjtug.sjtu.edu.cn/rust-static
+export RUSTUP_UPDATE_ROOT=https://mirrors.sjtug.sjtu.edu.cn/rust-static/rustup
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export PATH=$PATH:$HOME/.cargo/bin
