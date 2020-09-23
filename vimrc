@@ -69,7 +69,6 @@ set guioptions-=b
 " 开启24bit的颜色，开启这个颜色会更漂亮一些
 " set termguicolors
 " set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ Book\ :h13:cANSI
-set t_Co=256
 colorscheme gruvbox
 set background=dark
 
@@ -100,6 +99,9 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 Plug 'junegunn/vim-easy-align'
 
@@ -112,8 +114,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'valloric/youcompleteme'
 
 Plug 'easymotion/vim-easymotion'
-
-Plug 'itchyny/lightline.vim'
 
 Plug 'Yggdroot/indentLine'
 
@@ -128,7 +128,6 @@ Plug 'majutsushi/tagbar'
 Plug 'kien/ctrlp.vim'
 
 Plug 'morhetz/gruvbox'
-Plug 'shinchu/lightline-gruvbox.vim'
 
 Plug 'tpope/vim-surround'
 
@@ -142,8 +141,14 @@ call plug#end()
 
 
 " =================== configuration ====================
-" indentline
-let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+
+" airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'default'
+let g:airline_theme='gruvbox'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
 
 " tagbar
 " 设置tagbar快捷键
@@ -185,9 +190,6 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 
-" lightline-gruvbox.vim
-let g:lightline = {}
-let g:lightline.colorscheme = 'gruvbox'
 
 " fzf
 " Empty value to disable preview window altogether
