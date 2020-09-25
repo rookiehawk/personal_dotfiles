@@ -17,6 +17,7 @@ export ZSH=$HOME/.oh-my-zsh
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="robbyrussell"
 ZSH_THEME="powerlevel10k/powerlevel10k"
+
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
@@ -77,11 +78,9 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
 	git
-	extract
 	z
 	zsh-autosuggestions
 	zsh-syntax-highlighting
-
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -112,13 +111,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-export NVM_NODEJS_ORG_MIRROR=http://npm.taobao.org/mirrors/node
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -134,6 +129,13 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export NVM_NODEJS_ORG_MIRROR=http://npm.taobao.org/mirrors/node
+
 
 # golang 1.15
 export GOROOT=/opt/go
@@ -153,5 +155,28 @@ export RUSTUP_UPDATE_ROOT=https://mirrors.sjtug.sjtu.edu.cn/rust-static/rustup
 
 export PATH=$PATH:$HOME/.cargo/bin
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# doom emacs
+export PATH=$HOME/.emacs.d/bin:$PATH
+
+# logo-ls
+alias ls='logo-ls'
+alias la='logo-ls -A'
+alias ll='logo-ls -al'
+# equivalents with Git Status on by Default
+alias lsg='logo-ls -D'
+alias lag='logo-ls -AD'
+alias llg='logo-ls -alD'
+
+
+# fzf
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
+# Setting fd as the default source for fzf
+export FZF_DEFAULT_COMMAND='fd --type f'
+# To apply the command to CTRL-T as well
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
