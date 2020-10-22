@@ -13,8 +13,7 @@
 
 
  ;; cl - Common Lisp Extension
- (require 'cl)
-
+ (require 'cl-lib)
  ;; Add Packages
  (defvar my/packages '(
   ;; --- Auto-completion ---
@@ -33,7 +32,7 @@
  (setq package-selected-packages my/packages)
 
  (defun my/packages-installed-p ()
-     (loop for pkg in my/packages
+     (cl-loop for pkg in my/packages
     when (not (package-installed-p pkg)) do (return nil)
     finally (return t)))
 
@@ -101,9 +100,8 @@
 ;; (electric-indent-mode -1)
 
 ;; 更改显示字体大小 16pt
-(set-default-font "Monaco 11")
-;; (set-default-font "YaHei Consolas Hybrid 13")
-;; (set-default-font "Powerline Consolas 12")
+;; (set-frame-font "Monaco 11")
+(set-frame-font "YaHei Consolas Hybrid 13")
 (setq linum-format "%d ") ;; 注意%d后有空格，即用空格将行号和代码隔开
 
 ;; 快速打开配置文件

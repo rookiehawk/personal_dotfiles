@@ -18,6 +18,7 @@ set showmatch
 " set paste
 set clipboard=unnamed
 set nocompatible
+set backspace=2
 set showmode " 在底部显示，当前处于的模式
 set showcmd " 在底部显示当前键入的指令
 set t_Co=256
