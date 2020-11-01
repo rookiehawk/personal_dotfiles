@@ -28,8 +28,6 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-# DOOM EMACS
-export PATH=$HOME/.emacs.d/bin:$PATH
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
@@ -73,3 +71,4 @@ export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat 
 export FZF_DEFAULT_COMMAND='fd --type f'
 # To apply the command to CTRL-T as well
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
