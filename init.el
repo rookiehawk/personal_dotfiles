@@ -10,7 +10,7 @@
        (require 'package)
        (package-initialize)
  ;; 我这里使用了清华镜像源
-	 (setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+	 (setq package-archives '(("gnu" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
 		 ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/"))))
 (setq my-package-list ;启动时自动安装的插件
       '(
@@ -20,7 +20,9 @@
         counsel-etags dumb-jump 
         magit
 		company
-	;;	popwin
+		objed
+	    ;;	popwin
+        ;; hungry-delete
         ))
 (dolist (package my-package-list)
   (unless (package-installed-p package)
@@ -44,10 +46,10 @@
 (global-set-key (kbd "<f6>") 'ivy-resume)
 (global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-(global-set-key (kbd "<f1> f") 'counsel-describe-function)
-(global-set-key (kbd "<f1> v") 'counsel-describe-variable)
-(global-set-key (kbd "<f1> o") 'counsel-describe-symbol)
-(global-set-key (kbd "<f1> l") 'counsel-find-library)
+(global-set-key (kbd "<f2> f") 'counsel-describe-function)
+(global-set-key (kbd "<f2> v") 'counsel-describe-variable)
+(global-set-key (kbd "<f2> o") 'counsel-describe-symbol)
+(global-set-key (kbd "<f2> l") 'counsel-find-library)
 (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
 (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
 (global-set-key (kbd "C-c g") 'counsel-git)
@@ -65,6 +67,37 @@
 
 ;; theme
 (load-theme 'monokai t)
+
+
+;; objed emacs下面的text object插件
+(objed-mode 1)
+
+;; hungry-delete
+(require 'hungry-delete)
+(global-hungry-delete-mode)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ;; ================================= normal 配置 ========================
@@ -116,18 +149,16 @@
 (setq create-lockfiles nil)
 
 ;; 这个快捷键绑定可以用之后的插件 counsel 代替
-;; (global-set-key (kbd "C-x C-r") 'recentf-open-files)
 (require 'recentf)
 (recentf-mode 1)
-(setq recentf-max-menu-item 10)
-
+(setq recentf-max-menu-item 50)
+(global-set-key (kbd "C-x C-r") 'recentf-open-files)
 
 ;; 当你选中一段文字 之后输入一个字符会替换掉你选中部分的文字。
-(delete-selection-mode 1)
+(delete-selection-mode t)
 
 ;; 高亮当前行
 (global-hl-line-mode 1)
-
 
 
 ;;; Use fucking UTF-8
@@ -177,10 +208,14 @@
  ;; If there is more than one, they won't work right.
  '(delete-selection-mode nil)
  '(package-selected-packages
-   '(monokai-theme magit dumb-jump counsel-etags avy hydra counsel ivy-rich php-mode web-mode find-file-in-project)))
+   '(hungry-delete monokai-theme magit dumb-jump counsel-etags avy hydra counsel ivy-rich php-mode web-mode find-file-in-project)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(global-set-key (kbd "C-h C-f") 'find-function)
+(global-set-key (kbd "C-h C-v") 'find-variable)
+(global-set-key (kbd "C-h C-k") 'find-function-on-key)
