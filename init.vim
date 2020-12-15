@@ -76,10 +76,6 @@ Plug 'vim-airline/vim-airline-themes'
 " vim startify
 Plug 'mhinz/vim-startify'
 
-" fzf
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-
 " indentLine
 Plug 'Yggdroot/indentLine'
 
@@ -102,6 +98,9 @@ Plug 'easymotion/vim-easymotion'
 Plug 'ryanoasis/vim-devicons'
 
 Plug 'pangloss/vim-javascript'
+
+" coc-nvim
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'mattn/emmet-vim'
 " Initialize plugin system
@@ -172,44 +171,10 @@ map <Leader>k <Plug>(easymotion-k)
 
 
 
-" =================== fzf.vim =========================
-" Empty value to disable preview window altogether
-let g:fzf_preview_window = ''
-
-" Always enable preview window on the right with 60% width
-let g:fzf_preview_window = 'right:60%'
-
-" [Buffers] Jump to the existing window if possible
-let g:fzf_buffers_jump = 1
-
-" [[B]Commits] Customize the options used by 'git log':
-let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
-
-" [Tags] Command to generate tags file
-let g:fzf_tags_command = 'ctags -R'
-
-" [Commands] --expect expression for directly executing the command
-let g:fzf_commands_expect = 'alt-enter,ctrl-x'
-
-" Mapping selecting mappings
-nmap <leader><tab> <plug>(fzf-maps-n)
-xmap <leader><tab> <plug>(fzf-maps-x)
-omap <leader><tab> <plug>(fzf-maps-o)
-
-" Insert mode completion
-imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-imap <c-x><c-l> <plug>(fzf-complete-line)
-
-" Advanced customization using autoload functions
-inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
-
-
-" ================= javacript vim =============================================
+" ================= javacript vim =============================
 let g:javascript_plugin_jsdoc = 1
 
-" ================== emmet vim ===================================
+" ================== emmet vim ================================
 let g:user_emmet_mode='n'    "only enable normal mode functions.
 let g:user_emmet_mode='inv'  "enable all functions, which is equal to
 let g:user_emmet_mode='a'    "enable all function in all mode.
