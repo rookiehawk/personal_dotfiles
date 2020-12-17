@@ -56,7 +56,7 @@ set wildmode=longest:list,full " 命令模式下，底部操作指令按下tab�
 "==============================================================================
 " 主题配色 
 "==============================================================================
-colorscheme gruvbox
+" colorscheme gruvbox
 set background=dark
 
 
@@ -181,3 +181,7 @@ let g:user_emmet_mode='a'    "enable all function in all mode.
 
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
+
+
+" ================= coc.nvim ================================
+let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-pyright', 'coc-css', 'coc-html', 'coc-cssmodules', 'coc-eslint', 'coc-git', 'coc-stylelintplus', 'coc-snippets', 'coc-sql', 'coc-xml', 'coc-yaml', 'coc-vetur', 'coc-emmet']
