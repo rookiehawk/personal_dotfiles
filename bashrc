@@ -146,3 +146,15 @@ export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
 export RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
 export PATH=$PATH:$RUSTBINPATH
 source "$HOME/.cargo/env"
+
+# golang
+export GOROOT=/opt/go
+export GOPATH=/home/chaos/Me/code/goProjects
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+# 启用 Go Modules 功能
+# export GO111MODULE=on
+export GO111MODULE=auto
+# 配置 GOPROXY 环境变量
+export GOPROXY=https://goproxy.io
+# export GOPROXY=https://mirrors.aliyun.com/goproxy/
