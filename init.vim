@@ -1,5 +1,5 @@
 set cmdheight=2
-set conceallevel=0
+" set conceallevel=0
 set nu
 syntax on
 syntax enable
@@ -128,14 +128,14 @@ let g:airline_powerline_fonts = 1
 
 " ==================  indentLine ===============
 let g:indentLine_color_term = 239
-let g:indentLine_color_tty_light = 7 " (default: 4)
-let g:indentLine_color_dark = 1 " (default: 2)
-let g:vim_json_syntax_conceal = 0 "" 为了防止导致json的引号自动隐藏
-let g:indentLine_noConcealCursor=""  " 为了防止导致json的引号自动隐藏
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+let g:indentLine_setConceal = 0
+let g:indentLine_enabled = 1
+let g:indentLine_concealcursor = 'inc'
+let g:indentLine_conceallevel = 2
 
 
-
-" nerdtree
+" ==================  nerdtree  ================
 map <C-n> :NERDTreeToggle<CR>
 " map <F8> :NERDTreeToggle<CR>
 let g:NERDTreeDirArrowExpandable = '▸'
@@ -184,4 +184,7 @@ autocmd FileType html,css EmmetInstall
 
 
 " ================= coc.nvim ================================
-let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-pyright', 'coc-css', 'coc-html', 'coc-cssmodules', 'coc-eslint', 'coc-git', 'coc-stylelintplus', 'coc-snippets', 'coc-sql', 'coc-xml', 'coc-yaml', 'coc-vetur', 'coc-emmet','coc-go', 'coc-rust-analyzer']
+let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-pyright', 'coc-css', 'coc-html', 'coc-cssmodules', 'coc-eslint', 'coc-git', 'coc-stylelintplus', 'coc-snippets', 'coc-sql', 'coc-xml', 'coc-yaml', 'coc-vetur', 'coc-emmet', 'coc-go', 'coc-rust-analyzer']
+
+" coc.nvim 配置golang 自动导入 missing imports and auto-format 配和coc-go使用
+autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
