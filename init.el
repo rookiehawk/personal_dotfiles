@@ -1,5 +1,8 @@
-(setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
-                         ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
+;; (setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+   ;;                      ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
+
+(setq package-archives '(("gnu"   . "https://elpa.emacs-china.org/gnu/")
+                         ("melpa" . "https://elpa.emacs-china.org/melpa/")))
 
 (require 'package)
 (package-initialize)
@@ -7,21 +10,33 @@
 (setq package-selected-packages
       '(selectrum
 	selectrum-prescient
-        company
+	company
 	company-prescient
 	prescient
 	ivy
 	ivy-prescient
 	swiper
 	counsel
+	smex
 	monokai-theme
 	smartparens
 	js2-mode
+	web-mode
 	popwin
 	airline-themes
 	evil
+	evil-surround
 	magit
-;;	lsp-mode
+	git-gutter
+	lsp-mode
+	lsp-ui
+	lsp-ivy
+	company-lsp
+	lsp-python-ms
+	flycheck	
+	dap-mode
+	w3m
+	yasnippet
 ))
 
 (unless package-archive-contents
@@ -91,6 +106,56 @@
 (global-unset-key (kbd "C-x C-o"))
 (global-set-key (kbd "<down>") 'scroll-up-line)
 (global-set-key (kbd "<up>") 'scroll-down-line)
+
+
+;; dap-mode
+(add-hook 'dap-stopped-hook
+          (lambda (arg) (call-interactively #'dap-hydra)))
+
+
+
+
+;; w3m
+(require 'w3m-load)
+
+;; evil-surround
+(require 'evil-surround)
+
+
+
+;; smex
+(require 'smex) 
+
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+;; This is your old M-x.
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+
+
+;; git-gutter
+(global-git-gutter-mode +1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ;; ================================= normal 配置 ========================
 
