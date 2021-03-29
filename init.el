@@ -47,6 +47,7 @@
 	lsp-treemacs
 	winum
 	use-package
+	go-mode
 ))
 
 (unless package-archive-contents
@@ -71,6 +72,8 @@
 
 
 (require 'company)
+(setq company-idle-delay 0)
+(setq company-minimum-prefix-length 1)
 (add-hook 'prog-mode-hook #'company-mode)
 (add-hook 'conf-mode-hook #'company-mode)
 (with-eval-after-load "company"
@@ -147,7 +150,9 @@
 (add-hook 'python-mode-hook #'lsp) ; or lsp-deferred
 
 ;; go mode configuration
+(require 'go-mode)
 (require 'lsp-mode)
+(setq lsp-gopls-use-placeholders nil)
 (add-hook 'go-mode-hook #'lsp-deferred)
 
 ;; Set up before-save hooks to format buffer and add/delete imports.
@@ -155,7 +160,7 @@
 (defun lsp-go-install-save-hooks ()
   (add-hook 'before-save-hook #'lsp-format-buffer t t)
   (add-hook 'before-save-hook #'lsp-organize-imports t t))
-  (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 
 
 
@@ -182,6 +187,8 @@
 (ivy-mode 1)
 (setq ivy-use-virtual-buffers t)
 (setq ivy-count-format "(%d/%d) ")
+(setq ivy-height 10)
+(setq ivy-initial-inputs-alist nil)
 (setq enable-recursive-minibuffers t)
 ;; enable this if you want `swiper' to use it
 ;; (setq search-default-mode #'char-fold-to-regexp)
@@ -322,10 +329,19 @@
   :config (treemacs-set-scope-type 'Perspectives))
 
 
+;; flycheck 语法检查
+(use-package flycheck
+  :ensure t
+  :config
+  (global-flycheck-mode t)
+  )
 
 
-
-
+;; start lsp mode and yasnippet mode
+(require 'yasnippet)
+(yas-global-mode 1)
+(add-hook 'go-mode-hook #'lsp-deferred)
+(add-hook 'go-mode-hook #'yas-minor-mode)
 
 
 
