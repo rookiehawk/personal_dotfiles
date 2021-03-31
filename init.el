@@ -394,7 +394,8 @@
 (electric-pair-mode t)
 
 ;; 更改显示字体大小 xx pt
-(set-frame-font "FiraCode Nerd Font Mono 12")
+;; (set-frame-font "FiraCode Nerd Font Mono 12")
+(set-frame-font "Monaco 12")
 ;; (set-frame-font "YaHei Consolas Hybrid 12")
 (setq linum-format "%d ") ;; 注意%d后有空格，即用空格将行号和代码隔开
 
