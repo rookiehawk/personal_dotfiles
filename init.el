@@ -32,7 +32,7 @@
 	lsp-ivy
 	company-lsp
 	lsp-python-ms
-	flycheck	
+	flycheck
 	dap-mode
 	w3m
 	yasnippet
@@ -102,6 +102,20 @@
 
 (require 'airline-themes)
 (load-theme 'airline-light t)
+;; (load-theme 'airline-light t)
+;; Hide Evil and buffer state on inactive buffers.
+;; Valid Values: t (hidden), nil (shown)
+(setq airline-hide-state-on-inactive-buffers t)
+;; "Hide eyebrowse indicator on inactive buffers.
+;; Valid Values: t (hidden), nil (shown)"
+(setq airline-hide-eyebrowse-on-inactive-buffers t)
+;; Hide vc branch on inactive buffers:
+;; Valid Values: t (hidden), nil (shown)
+(setq airline-hide-vc-branch-on-inactive-buffers nil)
+;; Set eshell prompt colors to match the airline theme.
+;; Valid Values: t (enabled), nil (disabled)
+(setq airline-eshell-colors t)
+
 
 ;; Enable Evil
 (require 'evil)
