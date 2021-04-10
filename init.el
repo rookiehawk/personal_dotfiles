@@ -48,6 +48,7 @@
 	winum
 	use-package
 	go-mode
+	org-bullets
 ))
 
 (unless package-archive-contents
@@ -344,7 +345,9 @@
 (add-hook 'go-mode-hook #'lsp-deferred)
 (add-hook 'go-mode-hook #'yas-minor-mode)
 
-
+;; org-bullets
+(require 'org-bullets)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
 
 
