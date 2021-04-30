@@ -4,7 +4,6 @@ set nu
 syntax on
 syntax enable
 set autoindent
-set laststatus=2
 set ruler " 在状态栏显示光标的当前位置，位于哪一行那一列
 " set cursorline
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
@@ -56,7 +55,7 @@ set wildmode=longest:list,full " 命令模式下，底部操作指令按下tab�
 "==============================================================================
 " 主题配色 
 "==============================================================================
-" colorscheme gruvbox
+colorscheme gruvbox
 set background=dark
 
 
@@ -82,9 +81,6 @@ Plug 'Yggdroot/indentLine'
 " nerdtree
 Plug 'preservim/nerdtree'
 
-" auto-pairs
-Plug 'jiangmiao/auto-pairs'
-
 " gitgutter
 Plug 'airblade/vim-gitgutter'
 
@@ -98,6 +94,12 @@ Plug 'easymotion/vim-easymotion'
 Plug 'ryanoasis/vim-devicons'
 
 Plug 'pangloss/vim-javascript'
+
+" gruvbox theme
+Plug 'morhetz/gruvbox'
+
+" 自动注释的功能
+Plug 'preservim/nerdcommenter'
 
 " coc-nvim
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -175,7 +177,7 @@ let g:javascript_plugin_jsdoc = 1
 
 
 " ================= coc.nvim ================================
-let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-pyright', 'coc-css', 'coc-html', 'coc-cssmodules', 'coc-eslint', 'coc-git', 'coc-stylelintplus', 'coc-snippets', 'coc-sql', 'coc-xml', 'coc-yaml', 'coc-vetur', 'coc-emmet', 'coc-go', 'coc-rust-analyzer']
+let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-pyright', 'coc-css', 'coc-html', 'coc-cssmodules', 'coc-eslint', 'coc-git', 'coc-stylelintplus', 'coc-snippets', 'coc-sql', 'coc-xml', 'coc-yaml', 'coc-vetur', 'coc-emmet', 'coc-go', 'coc-rust-analyzer', 'coc-pairs', 'coc-markdownlint']
 
 " coc.nvim 配置golang 自动导入 missing imports and auto-format 配和coc-go使用
 autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
