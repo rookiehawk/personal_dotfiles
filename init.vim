@@ -177,7 +177,10 @@ let g:javascript_plugin_jsdoc = 1
 
 
 " ================= coc.nvim ================================
-let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-pyright', 'coc-css', 'coc-html', 'coc-cssmodules', 'coc-eslint', 'coc-git', 'coc-stylelintplus', 'coc-snippets', 'coc-sql', 'coc-xml', 'coc-yaml', 'coc-vetur', 'coc-emmet', 'coc-go', 'coc-rust-analyzer', 'coc-pairs', 'coc-markdownlint']
+let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-pyright', 'coc-css', 'coc-html', 'coc-cssmodules', 'coc-eslint', 'coc-git', 'coc-stylelintplus', 'coc-snippets', 'coc-sql', 'coc-xml', 'coc-yaml', 'coc-vetur', 'coc-emmet', 'coc-go', 'coc-rust-analyzer', 'coc-pairs', 'coc-markdownlint', 'coc-pairs', 'coc-lists']
 
 " coc.nvim 配置golang 自动导入 missing imports and auto-format 配和coc-go使用
 autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
+
+" coc.nvim 保存.go文件时，报错
+autocmd BufWritePre *.go silent! call CocAction('runCommand', 'editor.action.organizeImport')
