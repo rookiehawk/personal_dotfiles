@@ -39,10 +39,6 @@ set smartcase " 如果同时打开了ignorecase，那么对于只有一个大写
 
 " ================= 编辑 ==================
 " set spell spelllang=en_us " 拼写检查 英语
-set nobackup " 不创建备份文件 该文件的标志是，原文件名的末尾，加了一个波浪号
-set noswapfile " 不创建交换文件，交换文件的作用是系统崩溃时恢复文件，文件的开头是. 结尾是.swp
-set undofile " 保留撤销历史
-set undodir=~/.vim/.undo//
 set autochdir " 自动切换工作目录
 set noerrorbells " 出错时，不要发出响声
 set visualbell " 出错时，闪屏
@@ -55,6 +51,20 @@ set wildmode=longest:list,full " 命令模式下，底部操作指令按下tab�
 set clipboard=unnamed
 "文件类型自动检测，代码智能补全"
 set completeopt=longest,preview,menu
+
+" Put all temporary files under the same directory.
+" https://github.com/mhinz/vim-galore#handling-backup-swap-undo-and-viminfo-files
+set backup
+set backupdir   =$HOME/.vim/files/backup/
+set backupext   =-vimbackup
+set backupskip  =
+set directory   =$HOME/.vim/files/swap//
+set updatecount =100
+set undofile
+set undodir     =$HOME/.vim/files/undo/
+set viminfo     ='100,n$HOME/.vim/files/info/viminfo
+
+
 
 "隐藏工具栏"
 set guioptions-=T
@@ -70,131 +80,14 @@ set guioptions-=b
 " 开启24bit的颜色，开启这个颜色会更漂亮一些
 " set termguicolors
 " set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ Book\ :h13:cANSI
-colorscheme gruvbox
-set background=dark
-
-" =================== map 映射 ============================
+" colorscheme gruvbox
+" set background=dark
 
 
 
-"=================== 显示中文帮助 ==========================
-
-if version >= 603
-        set helplang=cn
-            set encoding=utf-8
+set list                   " Show non-printable characters.
+if has('multi_byte') && &encoding ==# 'utf-8'
+  let &listchars = 'tab:▸ ,extends:❯,precedes:❮,nbsp:±'
+else
+  let &listchars = 'tab:> ,extends:>,precedes:<,nbsp:.'
 endif
-
-
-" ================= guifont ================================
-if has('gui_running')
-    if has("win16") || has("win32") || has("win95") || has("win64")
-"        set guifont=Monaco:h13,Consolas:h13,Courier_New:h11:cANSI
-        set guifont=Liberation Mono:h13,Consolas:h13,Courier_New:h11:cANSI
-    else
-        set guifont=JetBrainsMono\ Nerd\ Font\ Mono\ 13
-    endif
-endif
-" set guifont=Andale\ Mono\ 11 这是linux设置gvim字体的格式
-" set guifont=Monaco:h11 Mac风格
-" set guifont=Andale_Mono:h11 Win风格
-
-call plug#begin('~/.vim/plugged')
-
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
-Plug 'junegunn/vim-easy-align'
-
-Plug 'scrooloose/nerdtree'
-
-Plug 'easymotion/vim-easymotion'
-
-Plug 'Yggdroot/indentLine'
-
-Plug 'jiangmiao/auto-pairs'
-
-Plug 'mhinz/vim-startify'
-
-Plug 'ryanoasis/vim-devicons'
-
-Plug 'majutsushi/tagbar'
-
-Plug 'kien/ctrlp.vim'
-
-Plug 'morhetz/gruvbox'
-
-Plug 'tpope/vim-surround'
-
-Plug 'airblade/vim-gitgutter'
-
-Plug 'pangloss/vim-javascript'
-
-Plug 'mattn/emmet-vim'
-" Initialize plugin system
-call plug#end()
-
-
-" =================== configuration ====================
-
-" airline
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'default'
-let g:airline_theme='violet'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-
-
-" ================== tagbar =============================
-" 设置tagbar快捷键
-nmap <F8> :TagbarToggle<CR>  
-let g:tagbar_ctags_bin='/usr/bin/ctags'  " 设置ctags所在路径
-" 需要下载ctags
-" auto-pairs
-" fly mode
-let g:AutoPairsFlyMode = 1
-let g:AutoPairsShortcutBackInsert = '<M-b>'
-
-" nerdtree
-map <C-n> :NERDTreeToggle<CR>
-
-" vim-easy-align
-nmap ga <Plug>(EasyAlign)
-xmap ga <Plug>(EasyAlign)
-
-" easymotion
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
-
-" Jump to anywhere you want with minimal keystrokes, with just one key binding.
-" `s{char}{label}`
-nmap s <Plug>(easymotion-overwin-f)
-" or
-" `s{char}{char}{label}`
-" Need one more keystroke, but on average, it may be more comfortable.
-nmap s <Plug>(easymotion-overwin-f2)
-
-" Turn on case-insensitive feature
-let g:EasyMotion_smartcase = 1
-
-" JK motions: Line motions
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-
-" ctrlp
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'ra'
-
-" ================= javacript vim =============================
-let g:javascript_plugin_jsdoc = 1
-
-" ================== emmet vim ================================
-let g:user_emmet_mode='n'    "only enable normal mode functions.
-let g:user_emmet_mode='inv'  "enable all functions, which is equal to
-let g:user_emmet_mode='a'    "enable all function in all mode.
-
-let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
-
-
