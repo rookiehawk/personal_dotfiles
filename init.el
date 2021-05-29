@@ -16,7 +16,7 @@
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 ;; 显示行号
-;; (global-linum-mode 1)
+;; (global-display-line-numbers-mode)
 
 ;; Set up the visible bell
 (setq visible-bell t)
@@ -186,6 +186,52 @@
   :after (projectile-mode)
   :config (counsel-projectile-mode))
 
+(use-package neotree
+  :after
+  projectile
+  :commands
+  (neotree-show neotree-hide neotree-dir neotree-find)
+  :custom
+  (neo-theme 'nerd2)
+  :bind
+  ("<f8>" . neotree-current-dir-toggle)
+  ("<f9>" . neotree-projectile-toggle)
+  :preface
+  (defun neotree-projectile-toggle ()
+    (interactive)
+    (let ((project-dir
+           (ignore-errors
+           ;;; Pick one: projectile or find-file-in-project
+             (projectile-project-root)
+             ))
+          (file-name (buffer-file-name))
+          (neo-smart-open t))
+      (if (and (fboundp 'neo-global--window-exists-p)
+               (neo-global--window-exists-p))
+          (neotree-hide)
+        (progn
+          (neotree-show)
+          (if project-dir
+              (neotree-dir project-dir))
+          (if file-name
+              (neotree-find file-name))))))
+  (defun neotree-current-dir-toggle ()
+    (interactive)
+    (let ((project-dir
+           (ignore-errors
+             (ffip-project-root)
+             ))
+          (file-name (buffer-file-name))
+          (neo-smart-open t))
+      (if (and (fboundp 'neo-global--window-exists-p)
+               (neo-global--window-exists-p))
+          (neotree-hide)
+        (progn
+          (neotree-show)
+          (if project-dir
+              (neotree-dir project-dir))
+          (if file-name
+              (neotree-find file-name)))))))
 
 (use-package treemacs
   :ensure t
@@ -335,6 +381,7 @@
 	 ("C-c k" . counsel-ag)
 	 ("C-c l" . counsel-locate)
 	 ("C-c g" . counsel-git)
+	 ("C-x C-r" . counsel-recentf)
          :map minibuffer-local-map
          ("C-r" . 'counsel-minibuffer-history))
   :custom
@@ -345,7 +392,6 @@
 
 
 (use-package prescient
-  :after counsel
   :config
   (prescient-persist-mode 1))
 
@@ -379,19 +425,10 @@
 
 
 
-(use-package all-the-icons-ivy
-  :init (add-hook 'after-init-hook 'all-the-icons-ivy-setup))
-
-
-
-
-
-
 ;;; =================== completion ========================
 ;; 著名的Emacs补全框架
 (use-package company 
   :defer 2 
-  :hook (prog-mode . company-mode)
   :init
   (setq company-tooltip-align-annotations t
 	company-idle-delay 0.1
@@ -405,7 +442,9 @@
               ("M-n" . nil) 
               ("M-p" . nil) 
               ("C-n" . #'company-select-next) 
-              ("C-p" . #'company-select-previous))) 
+              ("C-p" . #'company-select-previous))
+  :config
+  (global-company-mode t)) 
 
 ;; 人工智能补全代码
 (use-package company-tabnine
@@ -600,6 +639,18 @@
 
 (use-package magit-popup)
 
+(use-package git-gutter
+    :custom
+    (git-gutter:modified-sign "~")		; 
+    (git-gutter:added-sign    "+")		; 
+    (git-gutter:deleted-sign  "-")		; 
+    :custom-face
+    (git-gutter:modified ((t (:foreground "#f1fa8c" :background "#f1fa8c"))))
+    (git-gutter:added    ((t (:foreground "#50fa7b" :background "#50fa7b"))))
+    (git-gutter:deleted  ((t (:foreground "#ff79c6" :background "#ff79c6"))))
+    :config
+    (global-git-gutter-mode +1))
+
 
 ;;; ================================ code ==============================
 
@@ -630,8 +681,11 @@
   (lsp-enable-on-type-formatting nil)
   (lsp-response-timeout 3)  
   :bind (:map lsp-mode-map
-			  ("C-c C-f" . lsp-format-buffer)
-			  ("M-RET" . lsp-ui-sideline-apply-code-actions))
+	      ("C-c C-r" . lsp-ui-peek-find-references)
+	      ("C-c C-j" . lsp-ui-peek-find-definitions)
+	      ("C-c i"   . lsp-ui-peek-find-implementation)
+	      ("C-c C-f" . lsp-format-buffer)
+	      ("M-RET" . lsp-ui-sideline-apply-code-actions))
   :config
   (define-key lsp-command-map (kbd "s-g") lsp-command-map)
   
@@ -671,6 +725,10 @@
   (setq lsp-ui-doc-enable t
         ;; 文档显示的位置
         lsp-ui-doc-position 'at-point
+	lsp-ui-doc-max-width 35
+	lsp-ui-doc-max-height 8
+	lsp-ui-doc-use-childframe t
+	lsp-ui-doc-use-webkit t
         lsp-ui-sideline-enable nil
         lsp-signature-render-documentation nil
         ;; 显示文档的延迟
@@ -697,7 +755,8 @@
   :mode ("\\.vue\\'" . vue-mode))
 
 ;; js2-mode
-(use-package js2-mode)
+(use-package js2-mode
+  :mode ("\\.js\\'" . js2-mode))
 
 ;; js2-refactor
 (use-package js2-refactor
@@ -727,12 +786,23 @@
 
 
 (use-package yaml-mode
-  :mode "\\.yml\\'")
+  :mode
+  ("\\.yml\\'" . yaml-mode)
+  ("\\.yaml\\'" . yaml-mode))
 
 (use-package go-mode
-  :mode "\\.go\\'")
-
-
+  :mode "\\.go\\'"
+  :custom (gofmt-command "goimports")
+  :bind (:map go-mode-map
+         ("C-c C-n" . go-run)
+         ("C-c ."   . go-test-current-test)
+         ("C-c f"   . go-test-current-file)
+         ("C-c a"   . go-test-current-project))
+  :config
+  (add-hook 'before-save-hook #'gofmt-before-save)
+  (use-package gotest)
+  (use-package go-tag
+    :config (setq go-tag-args (list "-transform" "camelcase"))))
 
 
 
@@ -768,4 +838,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(git-gutter:added ((t (:foreground "#50fa7b" :background "#50fa7b"))))
+ '(git-gutter:deleted ((t (:foreground "#ff79c6" :background "#ff79c6"))))
+ '(git-gutter:modified ((t (:foreground "#f1fa8c" :background "#f1fa8c")))))
