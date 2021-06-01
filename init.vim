@@ -104,6 +104,12 @@ Plug 'preservim/nerdcommenter'
 " coc-nvim
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+" Ctrlp
+Plug 'ctrlpvim/ctrlp.vim'
+
+" colorizer
+Plug 'lilydjwg/colorizer'
+
 " Initialize plugin system
 call plug#end()
 
@@ -128,12 +134,13 @@ let g:airline_powerline_fonts = 1
 
 
 " ==================  indentLine ===============
+let g:indentLine_defaultGroup = 'SpecialKey'
 let g:indentLine_color_term = 239
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-let g:indentLine_setConceal = 0
+" let g:indentLine_setConceal = 0
 let g:indentLine_enabled = 1
-let g:indentLine_concealcursor = 'inc'
-let g:indentLine_conceallevel = 2
+" let g:indentLine_concealcursor = 'inc'
+" let g:indentLine_conceallevel = 2
 
 
 " ==================  nerdtree  ================
@@ -177,10 +184,34 @@ let g:javascript_plugin_jsdoc = 1
 
 
 " ================= coc.nvim ================================
-let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-pyright', 'coc-css', 'coc-html', 'coc-cssmodules', 'coc-eslint', 'coc-git', 'coc-stylelintplus', 'coc-snippets', 'coc-sql', 'coc-xml', 'coc-yaml', 'coc-vetur', 'coc-emmet', 'coc-go', 'coc-rust-analyzer', 'coc-pairs', 'coc-markdownlint', 'coc-pairs', 'coc-lists']
+let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-pyright', 'coc-css', 'coc-html', 'coc-cssmodules', 'coc-eslint', 'coc-git', 'coc-stylelintplus', 'coc-snippets', 'coc-sql', 'coc-xml', 'coc-yaml', 'coc-vetur', 'coc-emmet', 'coc-go', 'coc-rust-analyzer', 'coc-pairs', 'coc-markdownlint', 'coc-pairs', 'coc-lists', 'coc-tabnine']
 
 " coc.nvim 配置golang 自动导入 missing imports and auto-format 配和coc-go使用
 autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
 
 " coc.nvim 保存.go文件时，报错
 autocmd BufWritePre *.go silent! call CocAction('runCommand', 'editor.action.organizeImport')
+
+
+
+" ===================== ctrlp =========================
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+" When invoked without an explicit starting directory, CtrlP will set its local working directory according to this variable
+let g:ctrlp_working_path_mode = 'ra'
+" Exclude files and directories using Vim's wildignore and CtrlP's own g:ctrlp_custom_ignore. If a custom listing command is being used, exclusions are ignored
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+" Use a custom file listing command
+let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
+let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'  " Windows
+" Ignore files in .gitignore
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+
