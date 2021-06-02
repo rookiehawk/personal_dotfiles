@@ -1,3 +1,5 @@
+" 默认的leader键位是 \ 我喜欢这个键位作为leader键
+" let mapleader="\<space>"
 set cmdheight=2
 " set conceallevel=0
 set nu
@@ -83,6 +85,10 @@ Plug 'preservim/nerdtree'
 
 " gitgutter
 Plug 'airblade/vim-gitgutter'
+" git wrapper
+Plug 'tpope/vim-fugitive'
+" gv.vim  查看git提交记录，配合vim-fugitive使用 :GV
+Plug 'junegunn/gv.vim'
 
 " surround
 Plug 'tpope/vim-surround'
@@ -110,27 +116,40 @@ Plug 'ctrlpvim/ctrlp.vim'
 " colorizer
 Plug 'lilydjwg/colorizer'
 
+" far.vim  批量搜索替换
+Plug 'brooth/far.vim'
+
+" fzf 模糊搜索
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+" tagbar 依赖ctags https://ctags.io/
+" debian 可以直接通过apt下载 universal-ctags
+Plug 'majutsushi/tagbar'
+
+" 高亮感兴趣的单词，便于阅读代码 快捷键 <leader> k
+Plug 'lfv89/vim-interestingwords'
+
+" 代码注释 快捷键gc  gcgc
+Plug 'tpope/vim-commentary'
+
 " Initialize plugin system
 call plug#end()
 
 
 
 
-" ============== 插件配置 ================
+" ================================ 插件配置 ================================
 
 " ==============  airline =====================
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'default'
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#left_sep = '▸'
 let g:airline_theme='luna'
 let g:airline_powerline_fonts = 1
 " set guifont=DejaVu Sans Mono for Powerline Book:h13
 " 首先要安装powerline字体，然后终端使用powerline字体，才会完整显示出
 " luna 主题
-
-
-
 
 
 " ==================  indentLine ===============
@@ -144,37 +163,27 @@ let g:indentLine_enabled = 1
 
 
 " ==================  nerdtree  ================
-map <C-n> :NERDTreeToggle<CR>
-" map <F8> :NERDTreeToggle<CR>
+nmap <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
-"
-" auto-pairs
-let g:AutoPairsFlyMode = 1
-let g:AutoPairsShortcutBackInsert = '<M-b>'
-
-" auto-save-file
-let g:auto_save = 1  " enable AutoSave on Vim startup
-
 
 
 " ================  easy-motion ========================
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
 
-" Jump to anywhere you want with minimal keystrokes, with just one key binding.
-" `s{char}{label}`
-nmap s <Plug>(easymotion-overwin-f)
-" or
-" `s{char}{char}{label}`
-" Need one more keystroke, but on average, it may be more comfortable.
+" s{char}{char} to move to {char}{char}
 nmap s <Plug>(easymotion-overwin-f2)
 
-" Turn on case-insensitive feature
-let g:EasyMotion_smartcase = 1
+" Move to line
+map <Leader>l <Plug>(easymotion-bd-jk)
+nmap <Leader>l <Plug>(easymotion-overwin-line)
 
-" JK motions: Line motions
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
+
 " ===================== easy-motion ===========================
 
 
@@ -203,7 +212,6 @@ let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
   \ 'file': '\v\.(exe|so|dll)$',
@@ -215,3 +223,6 @@ let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'  " Windows
 " Ignore files in .gitignore
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
+
+" =================== tagbar =================================
+nmap <F8> :TagbarToggle<CR>
